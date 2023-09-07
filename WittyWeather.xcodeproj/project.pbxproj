@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E86639E02AAA8D370018FD28 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = E86639DF2AAA8D370018FD28 /* Models.swift */; };
+		E86639E22AAA8D5D0018FD28 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E86639E12AAA8D5D0018FD28 /* APIService.swift */; };
 		E8FE0E702AAA3B2D0065D8D0 /* WittyWeatherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FE0E6F2AAA3B2D0065D8D0 /* WittyWeatherApp.swift */; };
 		E8FE0E722AAA3B2D0065D8D0 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FE0E712AAA3B2D0065D8D0 /* Persistence.swift */; };
 		E8FE0E752AAA3B2D0065D8D0 /* WittyWeather.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E8FE0E732AAA3B2D0065D8D0 /* WittyWeather.xcdatamodeld */; };
@@ -36,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E86639DF2AAA8D370018FD28 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		E86639E12AAA8D5D0018FD28 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		E8FE0E6C2AAA3B2D0065D8D0 /* WittyWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WittyWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8FE0E6F2AAA3B2D0065D8D0 /* WittyWeatherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WittyWeatherApp.swift; sourceTree = "<group>"; };
 		E8FE0E712AAA3B2D0065D8D0 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -103,6 +107,8 @@
 				E8FE0E712AAA3B2D0065D8D0 /* Persistence.swift */,
 				E8FE0E762AAA3B2D0065D8D0 /* ContentView.swift */,
 				E8FE0E782AAA3B360065D8D0 /* Assets.xcassets */,
+				E86639DF2AAA8D370018FD28 /* Models.swift */,
+				E86639E12AAA8D5D0018FD28 /* APIService.swift */,
 				E8FE0E7A2AAA3B360065D8D0 /* WittyWeather.entitlements */,
 				E8FE0E732AAA3B2D0065D8D0 /* WittyWeather.xcdatamodeld */,
 				E8FE0E7B2AAA3B360065D8D0 /* Preview Content */,
@@ -269,6 +275,8 @@
 				E8FE0E702AAA3B2D0065D8D0 /* WittyWeatherApp.swift in Sources */,
 				E8FE0E772AAA3B2D0065D8D0 /* ContentView.swift in Sources */,
 				E8FE0E722AAA3B2D0065D8D0 /* Persistence.swift in Sources */,
+				E86639E22AAA8D5D0018FD28 /* APIService.swift in Sources */,
+				E86639E02AAA8D370018FD28 /* Models.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
