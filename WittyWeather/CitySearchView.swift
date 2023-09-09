@@ -23,8 +23,8 @@ struct CityListView: View {
             case .content(let cities):
 
                 List(cities, id: \.self) { city in
-                    Text(city.name)
-                }
+                    CityListItem(city: city)
+                }.searchable(text: $viewModel.searchQuery)
 
             case .error(let errorMessage):
                 VStack {
@@ -35,7 +35,7 @@ struct CityListView: View {
 
                     Button("Try again") {
                         Task {
-                            await viewModel.getCity(name: "Curitiba")
+                            await viewModel.getCities(query: "Curitiba")
                         }
                     }
                     .padding(.horizontal, 20)

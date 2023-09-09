@@ -34,7 +34,7 @@ class APIService: APIServiceType {
             throw ServiceError.invalidUrl
         }
 
-        var request = URLRequest(url: url)
+        let request = URLRequest(url: url)
 
         do {
 
@@ -53,8 +53,12 @@ class APIService: APIServiceType {
 
     func getCityGeocoding(cityName: String) async throws -> [CityGeocoding] {
 
+        //Sanitize
+
+        let sanitizedQuery = cityName.replacingOccurrences(of: " ", with: "%20")
+
         //HTTP
-        guard let url = URL(string: "https://api.openweathermap.org/geo/1.0/direct?q=\(cityName)&limit=5&appid=\(apiKey)") else {
+        guard let url = URL(string: "https://api.openweathermap.org/geo/1.0/direct?q=\(sanitizedQuery)&limit=5&appid=\(apiKey)") else {
 
             throw ServiceError.invalidUrl
         }
