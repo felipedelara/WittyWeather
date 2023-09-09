@@ -27,6 +27,7 @@ struct CityListView: View {
                 }.searchable(text: $viewModel.searchQuery)
 
             case .error(let errorMessage):
+                //TODO: revisit this
                 VStack {
                     Text("Error: \(errorMessage)")
                         .font(.headline)
@@ -41,7 +42,6 @@ struct CityListView: View {
                     .padding(.horizontal, 20)
                     .frame(height: 40.0)
                     .buttonStyle(PrimaryButtonStyle())
-
                 }
             }
         }

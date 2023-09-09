@@ -10,12 +10,12 @@ import Combine
 
 class CityListViewModel: ObservableObject {
 
-    var allCities: Set<CityGeocoding> = [] // Sets will avoid duplicates
+    var allCities: Set<City> = [] // Sets will avoid duplicates
 
     enum ViewState {
 
         case loading
-        case content([CityGeocoding])
+        case content([City])
         case error(String)
     }
 
@@ -70,7 +70,7 @@ class CityListViewModel: ObservableObject {
             // Sleep for half a second. Nicer effect visually
             try await Task.sleep(nanoseconds: 500_000_000)
 
-            let cities = try await apiService.getCityGeocoding(cityName: name)
+            let cities = try await apiService.getCity(cityName: name)
 
             DispatchQueue.main.async {
 
@@ -88,7 +88,7 @@ class CityListViewModel: ObservableObject {
 
         do {
 
-            let cities = try await apiService.getCityGeocoding(cityName: query)
+            let cities = try await apiService.getCity(cityName: query)
 
             DispatchQueue.main.async {
 
@@ -99,7 +99,7 @@ class CityListViewModel: ObservableObject {
         } catch {
 
             print(error)
-
+            //TODO: do better handling
 //            DispatchQueue.main.async {
 //
 //                switch error as? ServiceError {

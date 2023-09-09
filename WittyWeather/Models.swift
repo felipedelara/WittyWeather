@@ -14,11 +14,12 @@ struct ForecastResponse: Codable {
     let message: Int //  Internal parameter
     let cnt: Int // A number of timestamps returned in the API response
     let list: [Forecast]
-    let city: City
+    let city: CityInfo
 }
 
-// MARK: - City
-struct City: Codable {
+// MARK: - CityInfo
+// Simpler city model. Using the other City model for most purposes
+struct CityInfo: Codable {
 
     let id: Int
     let name: String
@@ -31,16 +32,17 @@ struct City: Codable {
 }
 
 // MARK: - Coord
-struct Coord: Codable {
+struct Coord: Codable, Equatable {
 
     let lat, lon: Double
 }
 
 // MARK: - List
-struct Forecast: Codable {
+struct Forecast: Codable, Hashable, Equatable {
+
 
     let dt: Int // Time of data forecasted, unix, UTC
-    let main: MainClass
+    let main: MainForecast
     let weather: [Weather]
     let clouds: Clouds
     let wind: Wind
@@ -58,13 +60,13 @@ struct Forecast: Codable {
 }
 
 // MARK: - Clouds
-struct Clouds: Codable {
+struct Clouds: Codable, Equatable, Hashable {
 
     let all: Int // Cloudiness, %
 }
 
-// MARK: - MainClass
-struct MainClass: Codable {
+// MARK: - MainForecast
+struct MainForecast: Codable, Equatable, Hashable {
 
     let temp: Double // Temperature. Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit
     let feelsLike: Double // This temperature parameter accounts for the human perception of weather. Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit
@@ -89,7 +91,7 @@ struct MainClass: Codable {
 }
 
 // MARK: - Rain
-struct Rain: Codable {
+struct Rain: Codable, Equatable, Hashable {
 
     let last3hours: Double // Rain volume for last 3 hours, mm. Please note that only mm as units of measurement are available for this parameter
 
@@ -100,18 +102,19 @@ struct Rain: Codable {
 }
 
 // MARK: - Sys
-struct Sys: Codable {
+struct Sys: Codable, Equatable, Hashable {
+
     let pod: PartOfDay
 }
 
-enum PartOfDay: String, Codable {
+enum PartOfDay: String, Codable, Equatable, Hashable {
 
     case day = "d"
     case night = "n"
 }
 
 // MARK: - Weather
-struct Weather: Codable {
+struct Weather: Codable, Equatable, Hashable {
 
     let id: Int // Weather condition id
     let main: String // Group of weather parameters (Rain, Snow, Clouds etc.)
@@ -121,7 +124,7 @@ struct Weather: Codable {
 
 
 // MARK: - Wind
-struct Wind: Codable {
+struct Wind: Codable, Equatable, Hashable {
 
     let speed: Double // Wind speed. Unit Default: meter/sec, Metric: meter/sec, Imperial: miles/hour
     let deg: Int // Wind direction, degrees (meteorological)
@@ -130,7 +133,7 @@ struct Wind: Codable {
 
 
 // MARK: - CityGeoInfo
-struct CityGeocoding: Codable, Equatable, Hashable {
+struct City: Codable, Equatable, Hashable {
 
     let name: String
     let localNames: [String: String]?

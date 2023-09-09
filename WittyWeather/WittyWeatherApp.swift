@@ -15,8 +15,6 @@ struct WittyWeatherApp: App {
         WindowGroup {
 
             CityListView()
-//            ContentView()
-//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }
