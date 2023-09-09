@@ -27,7 +27,8 @@ struct ContentView: View {
     private func addItem() {
 
         Task {
-           try await APIService().getForecast()
+//           try await APIService().getForecast()
+            try await APIService().getCityGeocoding(cityName: "Curitiba")
         }
     }
 

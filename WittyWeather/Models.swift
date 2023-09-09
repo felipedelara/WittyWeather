@@ -13,7 +13,7 @@ struct ForecastResponse: Codable {
     let cod: String //  Internal parameter
     let message: Int //  Internal parameter
     let cnt: Int // A number of timestamps returned in the API response
-    let list: [List]
+    let list: [Forecast]
     let city: City
 }
 
@@ -37,7 +37,7 @@ struct Coord: Codable {
 }
 
 // MARK: - List
-struct List: Codable {
+struct Forecast: Codable {
 
     let dt: Int // Time of data forecasted, unix, UTC
     let main: MainClass
@@ -126,5 +126,43 @@ struct Wind: Codable {
     let speed: Double // Wind speed. Unit Default: meter/sec, Metric: meter/sec, Imperial: miles/hour
     let deg: Int // Wind direction, degrees (meteorological)
     let gust: Double // Wind gust. Unit Default: meter/sec, Metric: meter/sec, Imperial: miles/hour
+}
+
+
+// MARK: - CityGeoInfo
+struct CityGeocoding: Codable, Equatable, Hashable {
+
+    let id = UUID()
+    let name: String
+    let localNames: [String: String]?
+    let lat, lon: Double
+    let country, state: String
+
+    enum CodingKeys: String, CodingKey {
+
+        case name
+        case localNames = "local_names"
+        case lat, lon, country, state
+    }
+
+    public init(name: String, localNames: [String : String]?, lat: Double, lon: Double, country: String, state: String) {
+        self.name = name
+        self.localNames = localNames
+        self.lat = lat
+        self.lon = lon
+        self.country = country
+        self.state = state
+    }
+
+    public init(from decoder: Decoder) throws {
+
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.name = try container.decode(String.self, forKey: .name)
+        self.localNames = try container.decodeIfPresent([String : String].self, forKey: .localNames)
+        self.lat = try container.decode(Double.self, forKey: .lat)
+        self.lon = try container.decode(Double.self, forKey: .lon)
+        self.country = try container.decode(String.self, forKey: .country)
+        self.state = try container.decode(String.self, forKey: .state)
+    }
 }
 

@@ -17,6 +17,7 @@ enum ServiceError: Error {
 protocol APIServiceType {
 
     func getForecast() async throws -> ForecastResponse
+    func getCityGeocoding(cityName: String) async throws -> [CityGeocoding]
 }
 
 class APIService: APIServiceType {
@@ -40,6 +41,31 @@ class APIService: APIServiceType {
             let (data, _) = try await URLSession.shared.data(for: request)
 
             let model = try JSONDecoder().decode(ForecastResponse.self, from: data)
+            print(model)
+            return model
+
+        } catch {
+
+            print(error)
+            throw error
+        }
+    }
+
+    func getCityGeocoding(cityName: String) async throws -> [CityGeocoding] {
+
+        //HTTP
+        guard let url = URL(string: "https://api.openweathermap.org/geo/1.0/direct?q=\(cityName)&limit=5&appid=\(apiKey)") else {
+
+            throw ServiceError.invalidUrl
+        }
+
+        var request = URLRequest(url: url)
+
+        do {
+
+            let (data, _) = try await URLSession.shared.data(for: request)
+
+            let model = try JSONDecoder().decode([CityGeocoding].self, from: data)
             print(model)
             return model
 
