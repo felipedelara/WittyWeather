@@ -1,5 +1,5 @@
 //
-//  CityWeatherView.swift
+//  ForecastListView.swift
 //  WittyWeather
 //
 //  Created by Felipe Lara on 10/09/2023.
@@ -8,7 +8,31 @@
 import Foundation
 import SwiftUI
 
-struct CityForecastView: View {
+struct CityForecastItemView: View {
+
+    let forecast: ForecastViewModel
+
+    var body: some View{
+
+        HStack {
+
+            Text(forecast.hour)
+                .font(.headline)
+
+
+            VStack(alignment: .leading) {
+
+                Text("Temp. \(forecast.currentTemperatureCelsius)").font(.subheadline)
+                Text("Max. \(forecast.maxTemperatureCelsius)").font(.subheadline)
+                Text("Min. \(forecast.minTemperatureCelsius)").font(.subheadline)
+            }
+            Spacer()
+            IconView(viewModel: IconViewModel(iconDesc: forecast.icon))
+        }
+    }
+}
+
+struct ForecastListView: View {
 
     let city: City
 
@@ -33,21 +57,7 @@ struct CityForecastView: View {
 
                             ForEach(dayForecasts, id: \.dt) { forecast in
 
-                                HStack {
-
-                                    Text(forecast.hour)
-                                        .font(.headline)
-
-
-                                    VStack(alignment: .leading) {
-
-                                        Text("Temp. \(forecast.currentTemperatureCelsius)").font(.subheadline)
-                                        Text("Max. \(forecast.maxTemperatureCelsius)").font(.subheadline)
-                                        Text("Min. \(forecast.minTemperatureCelsius)").font(.subheadline)
-                                    }
-                                    Spacer()
-                                    IconView(viewModel: IconViewModel(iconDesc: forecast.icon))
-                                }
+                                CityForecastItemView(forecast: forecast)
                             }
                         }
                     }
@@ -89,6 +99,6 @@ struct ForecastListView_Previews: PreviewProvider {
 
         let sampleCity = City(name: "New York", localNames: ["en": "New York"], lat: 40.7128, lon: -74.0060, country: "US", state: "NY")
 
-        return CityForecastView(city: sampleCity)
+        return ForecastListView(city: sampleCity)
     }
 }

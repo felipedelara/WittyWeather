@@ -15,7 +15,7 @@ struct CityListItem: View {
 
     var body: some View {
 
-        NavigationLink(destination: CityForecastView(city: city)) {
+        NavigationLink(destination: ForecastListView(city: city)) {
 
             HStack {
 
@@ -37,7 +37,9 @@ struct CityListItem: View {
 }
 
 struct CityListItem_Previews: PreviewProvider {
+
     static var previews: some View {
+
         let sampleCity = City(name: "New York", localNames: ["en": "New York"], lat: 40.7128, lon: -74.0060, country: "US", state: "NY")
         return CityListItem(city: sampleCity)
     }

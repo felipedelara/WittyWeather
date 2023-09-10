@@ -67,44 +67,4 @@ class ForecastListViewModel: ObservableObject {
 
         return groupedDictionary.sorted { $0.key < $1.key }
     }
-
-    func stringToDate(_ dateString: String, format: String) -> Date {
-
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = format
-
-        return dateFormatter.date(from: dateString) ?? Date()
-    }
-}
-
-extension String {
-
-    func formatDate(originalFormat: String = "yyyy-MM-dd HH:mm:ss",
-                    newFormat: String = "dd-MM-yyyy") -> String {
-
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = originalFormat
-
-        if let date = dateFormatter.date(from: self) {
-
-            dateFormatter.dateFormat = newFormat
-            return dateFormatter.string(from: date)
-        }
-
-        return ""
-    }
-
-    func hourFromDate(originalFormat: String = "yyyy-MM-dd HH:mm:ss") -> String {
-
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = originalFormat
-
-        if let date = dateFormatter.date(from: self) {
-
-            dateFormatter.dateFormat = "HH:mm"
-            return dateFormatter.string(from: date)
-        }
-
-        return ""
-    }
 }

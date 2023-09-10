@@ -14,6 +14,7 @@ struct IconView: View {
     var body: some View {
 
         switch viewModel.state {
+
         case .loading:
             ProgressView()
                 .frame(width: 60.0, height: 60.0)

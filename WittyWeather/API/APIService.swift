@@ -30,8 +30,6 @@ class APIService: APIServiceType {
 
     func getForecast(city: City) async throws -> ForecastResponse {
 
-        // Request
-
         guard let url = URL(string: "https://api.openweathermap.org/data/2.5/forecast?lat=\(city.lat)&lon=\(city.lon)&appid=\(apiKey)") else {
 
             throw ServiceError.invalidUrl
@@ -53,8 +51,6 @@ class APIService: APIServiceType {
 
     func getCity(cityName: String) async throws -> [City] {
 
-        print("https://api.openweathermap.org/geo/1.0/direct?q=\(cityName.encodeStringForURL())&limit=5&appid=\(apiKey)")
-        // Request
         guard let url = URL(string: "https://api.openweathermap.org/geo/1.0/direct?q=\(cityName.encodeStringForURL())&limit=5&appid=\(apiKey)") else {
 
             throw ServiceError.invalidUrl
@@ -76,7 +72,6 @@ class APIService: APIServiceType {
 
     func getIcon(iconDesc: String) async throws -> UIImage {
 
-        // Request
         guard let url = URL(string: "https://openweathermap.org/img/wn/\(iconDesc)@2x.png") else {
 
             throw ServiceError.invalidUrl
@@ -103,11 +98,3 @@ class APIService: APIServiceType {
     }
 }
 
-extension String {
-
-    func encodeStringForURL() -> String {
-
-        let allowedCharacterSet = CharacterSet(charactersIn: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~%")
-        return self.replacingOccurrences(of: " ", with: "%20").addingPercentEncoding(withAllowedCharacters: allowedCharacterSet) ?? ""
-    }
-}

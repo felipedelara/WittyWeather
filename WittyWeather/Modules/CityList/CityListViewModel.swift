@@ -74,7 +74,6 @@ class CityListViewModel: ObservableObject {
                 self.allCities.formUnion(cities)
                 self.state = .content(cities)
             }
-
         } catch {
 
             DispatchQueue.main.async {
