@@ -12,7 +12,7 @@ struct CityForecastView: View {
 
     let city: City
 
-    @StateObject var viewModel = CityForecastViewModel()
+    @StateObject var viewModel = ForecastListViewModel()
 
     var body: some View {
 
@@ -31,13 +31,13 @@ struct CityForecastView: View {
 
                         Section(header: Text(day)) {
 
-                            ForEach(dayForecasts, id: \.dt) { forecast in
+                            ForEach(dayForecasts, id: \.day) { forecast in
 
                                 VStack(alignment: .leading) {
-                                    Text(forecast.dtTxt.hourFromDate())
-                                    Text("Temp. \(forecast.main.temp)")
-                                    Text("Max. \(forecast.main.tempMax)")
-                                    Text("Min. \(forecast.main.tempMin)")
+                                    Text(forecast.hour)
+                                    Text("Temp. \(forecast.currentTemperatureCelsius)")
+                                    Text("Max. \(forecast.maxTemperatureCelsius)")
+                                    Text("Min. \(forecast.minTemperatureCelsius)")
                                 }
                             }
                         }
@@ -69,7 +69,7 @@ struct CityForecastView: View {
 
                 await viewModel.getForecast(city: self.city)
             }
-        }
+        }.navigationBarTitle("\(city.name)'s 5 day forecast")
     }
     
 }
