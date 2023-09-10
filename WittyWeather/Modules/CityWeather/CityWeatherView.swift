@@ -23,19 +23,28 @@ struct CityForecastView: View {
             case .loading:
                 ProgressView("Loading...")
 
-            case .content(let forecasts):
+            case .content(let groupedForecasts):
 
-                List(forecasts, id: \.self) { forecast in
+                List {
 
-                    VStack(alignment: .leading) {
+                    ForEach(groupedForecasts, id: \.0) { day, dayForecasts in
 
-                        Text(forecast.dtTxt)
-                        Text("Temp. \(forecast.main.temp)")
-                        Text("Max. \(forecast.main.tempMax)")
-                        Text("Min. \(forecast.main.tempMin)")
+                        Section(header: Text(day)) {
 
+                            ForEach(dayForecasts, id: \.dt) { forecast in
+
+                                VStack(alignment: .leading) {
+                                    Text(forecast.dtTxt.hourFromDate())
+                                    Text("Temp. \(forecast.main.temp)")
+                                    Text("Max. \(forecast.main.tempMax)")
+                                    Text("Min. \(forecast.main.tempMin)")
+                                }
+                            }
+                        }
                     }
                 }
+                .listStyle(InsetGroupedListStyle())
+
             case .error(let errorMessage):
                 //TODO: revisit this
                 VStack {
@@ -62,6 +71,7 @@ struct CityForecastView: View {
             }
         }
     }
+    
 }
 
 struct ForecastListView_Previews: PreviewProvider {
@@ -71,55 +81,5 @@ struct ForecastListView_Previews: PreviewProvider {
         let sampleCity = City(name: "New York", localNames: ["en": "New York"], lat: 40.7128, lon: -74.0060, country: "US", state: "NY")
 
         return CityForecastView(city: sampleCity)
-    }
-}
-
-class CityForecastViewModel: ObservableObject {
-
-    enum ViewState {
-
-        case loading
-        case content([Forecast])
-        case error(String)
-    }
-
-    @Published var state: ViewState = .loading
-
-    private var apiService: APIServiceType
-
-    init(apiService: APIServiceType = APIService()) {
-
-        self.apiService = apiService
-
-        self.state = .loading
-    }
-
-    // MARK: - Functions
-    func getForecast(city: City) async {
-
-        do {
-
-            let forecast = try await self.apiService.getForecast(city:city)
-
-            DispatchQueue.main.async {
-
-                self.state = .content(forecast.list)
-            }
-
-        } catch {
-
-            print(error)
-            DispatchQueue.main.async {
-
-                switch error as? ServiceError {
-                case .noToken:
-                    self.state = .error("No API token found. Please go to Settings and insert one.")
-                case .invalidUrl:
-                    self.state = .error("An invalid request has been attempted. Please contact support.")
-                case .none, .genericError:
-                    self.state = .error(error.localizedDescription)
-                }
-            }
-        }
     }
 }
