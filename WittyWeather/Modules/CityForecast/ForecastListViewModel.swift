@@ -43,6 +43,16 @@ class ForecastListViewModel: ObservableObject {
 
                 print(groupedByDate)
 
+                for (key, values) in groupedByDate {
+
+                    print(key)
+                    for value in values {
+
+                        print("Item for \(key): day \(value.day) hour \(value.hour) temp \(value.currentTemperatureCelsius) ")
+                    }
+                    print("\n")
+                }
+
                 self.state = .content(groupedByDate)
             }
 
@@ -80,16 +90,6 @@ class ForecastListViewModel: ObservableObject {
         dateFormatter.dateFormat = format
 
         return dateFormatter.date(from: dateString) ?? Date()
-    }
-}
-
-extension Date {
-
-    func toString(format: String) -> String {
-
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = format
-        return dateFormatter.string(from: self)
     }
 }
 

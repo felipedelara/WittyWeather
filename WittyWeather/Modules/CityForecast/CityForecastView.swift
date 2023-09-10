@@ -31,10 +31,12 @@ struct CityForecastView: View {
 
                         Section(header: Text(day)) {
 
-                            ForEach(dayForecasts, id: \.day) { forecast in
+                            ForEach(dayForecasts, id: \.dt) { forecast in
 
                                 VStack(alignment: .leading) {
                                     Text(forecast.hour)
+                                    Text(forecast.day)
+
                                     Text("Temp. \(forecast.currentTemperatureCelsius)")
                                     Text("Max. \(forecast.maxTemperatureCelsius)")
                                     Text("Min. \(forecast.minTemperatureCelsius)")
