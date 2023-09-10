@@ -23,8 +23,7 @@ struct CityForecastItemView: View {
             VStack(alignment: .leading) {
 
                 Text("Temp. \(forecast.currentTemperatureCelsius)").font(.subheadline)
-                Text("Max. \(forecast.maxTemperatureCelsius)").font(.subheadline)
-                Text("Min. \(forecast.minTemperatureCelsius)").font(.subheadline)
+                Text("Feels like \(forecast.feelsLike)").font(.subheadline)
             }
             Spacer()
             IconView(viewModel: IconViewModel(iconDesc: forecast.icon))

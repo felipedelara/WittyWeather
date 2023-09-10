@@ -37,9 +37,8 @@ struct Coord: Codable, Equatable {
     let lat, lon: Double
 }
 
-// MARK: - List
+// MARK: - Forecast
 struct Forecast: Codable, Hashable, Equatable {
-
 
     let dt: Int // Time of data forecasted, unix, UTC
     let main: MainForecast

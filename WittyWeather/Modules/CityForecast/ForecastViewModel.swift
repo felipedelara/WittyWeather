@@ -14,8 +14,7 @@ class ForecastViewModel {
     let hour: String
     let icon: String
     let currentTemperatureCelsius: String
-    let maxTemperatureCelsius: String
-    let minTemperatureCelsius: String
+    let feelsLike: String
     let dt: Int
 
     init?(forecast: Forecast) {
@@ -28,12 +27,14 @@ class ForecastViewModel {
 
         self.icon = weather.icon
 
-        self.currentTemperatureCelsius = Self.convertTemp(temp: Double(forecast.main.tempMin), from: .kelvin, to: .celsius)
-        self.maxTemperatureCelsius = Self.convertTemp(temp: Double(forecast.main.tempMin), from: .kelvin, to: .celsius)
-        self.minTemperatureCelsius = Self.convertTemp(temp: Double(forecast.main.tempMin), from: .kelvin, to: .celsius)
+        self.currentTemperatureCelsius = TemperatureConverter.convertTemp(temp: Double(forecast.main.temp), from: .kelvin, to: .celsius)
+        self.feelsLike = TemperatureConverter.convertTemp(temp: Double(forecast.main.feelsLike), from: .kelvin, to: .celsius)
 
         self.dt = forecast.dt
     }
+}
+
+struct TemperatureConverter {
 
     static func convertTemp(temp: Double, from inputTempType: UnitTemperature, to outputTempType: UnitTemperature) -> String {
 
