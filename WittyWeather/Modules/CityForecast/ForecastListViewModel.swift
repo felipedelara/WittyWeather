@@ -37,27 +37,12 @@ class ForecastListViewModel: ObservableObject {
             DispatchQueue.main.async {
 
                 let viewModels = response.list.compactMap { ForecastViewModel(forecast: $0) }
-
                 let groupedByDate = self.groupedByDate(forecasts: viewModels)
-
-                print(groupedByDate)
-
-                for (key, values) in groupedByDate {
-
-                    print(key)
-                    for value in values {
-
-                        print("Item for \(key): day \(value.day) hour \(value.hour) temp \(value.currentTemperatureCelsius) ")
-                    }
-                    print("\n")
-                }
-
                 self.state = .content(groupedByDate)
             }
 
         } catch {
 
-            print(error)
             DispatchQueue.main.async {
 
                 switch error as? ServiceError {
@@ -94,7 +79,8 @@ class ForecastListViewModel: ObservableObject {
 
 extension String {
 
-    func formatDate(originalFormat: String = "yyyy-MM-dd HH:mm:ss", newFormat: String = "dd-MM-yyyy") -> String {
+    func formatDate(originalFormat: String = "yyyy-MM-dd HH:mm:ss",
+                    newFormat: String = "dd-MM-yyyy") -> String {
 
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = originalFormat

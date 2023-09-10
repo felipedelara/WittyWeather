@@ -41,8 +41,6 @@ struct CityForecastView: View {
 
                                     VStack(alignment: .leading) {
 
-                                        Text(forecast.description).font(.subheadline)
-
                                         Text("Temp. \(forecast.currentTemperatureCelsius)").font(.subheadline)
                                         Text("Max. \(forecast.maxTemperatureCelsius)").font(.subheadline)
                                         Text("Min. \(forecast.minTemperatureCelsius)").font(.subheadline)
@@ -80,7 +78,7 @@ struct CityForecastView: View {
 
                 await viewModel.getForecast(city: self.city)
             }
-        }.navigationBarTitle("\(city.name)'s 5 day forecast")
+        }.navigationBarTitle("\(city.name)'s forecast")
     }
     
 }

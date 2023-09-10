@@ -40,7 +40,8 @@ class CityListViewModel: ObservableObject {
         }
 
         $searchQuery
-            .debounce(for: .milliseconds(800), scheduler: RunLoop.main) // debounces the string publisher, such that it delays the process of sending request to remote server.
+            .dropFirst(1)
+            .debounce(for: .milliseconds(800), scheduler: RunLoop.main) // Debounces the string publisher, such that it delays the process of sending request to remote server.
             .removeDuplicates()
             .map({ (string) -> String? in
                 if string.count < 1 {
@@ -50,37 +51,15 @@ class CityListViewModel: ObservableObject {
                 }
 
                 return string
-            }) // prevents sending numerous requests and sends nil if the count of the characters is less than 1.
-            .compactMap{ $0 } // removes the nil values so the search string does not get passed down to the publisher chain
-            .sink { (_) in
-                //
-            } receiveValue: { [self] (query) in
+            }) // Prevents sending numerous requests and sends nil if the count of the characters is less than 1.
+            .compactMap{ $0 } // Removes the nil values so the search string does not get passed down to the publisher chain
+            .sink { _ in } receiveValue: { [self] (query) in
 
                 Task {
 
                     await self.getCities(query: query)
                 }
             }.store(in: &subscription)
-    }
-
-    // MARK: - Functions
-    func getCity(name: String) async {
-
-        do {
-            // Sleep for half a second. Nicer effect visually
-            try await Task.sleep(nanoseconds: 500_000_000)
-
-            let cities = try await apiService.getCity(cityName: name)
-
-            DispatchQueue.main.async {
-
-                self.allCities.formUnion(cities)
-                self.state = .content(cities)
-            }
-
-        } catch {
-
-        }
     }
 
     // MARK: - Functions
@@ -98,19 +77,18 @@ class CityListViewModel: ObservableObject {
 
         } catch {
 
-            print(error)
-            //TODO: do better handling
-//            DispatchQueue.main.async {
-//
-//                switch error as? ServiceError {
-//                case .noToken:
-//                    self.state = .error("No API token found. Please go to Settings and insert one.")
-//                case .invalidUrl:
-//                    self.state = .error("An invalid request has been attempted. Please contact support.")
-//                case .none, .genericError:
-//                    self.state = .error(error.localizedDescription)
-//                }
-//            }
+            DispatchQueue.main.async {
+
+                switch error as? ServiceError {
+
+                case .noToken:
+                    self.state = .error("No API token found. Please go to Settings and insert one.")
+                case .invalidUrl:
+                    self.state = .error("An invalid request has been attempted. Please contact support.")
+                default:
+                    self.state = .error(error.localizedDescription)
+                }
+            }
         }
     }
 }

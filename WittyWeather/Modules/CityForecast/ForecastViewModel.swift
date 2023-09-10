@@ -16,7 +16,6 @@ class ForecastViewModel {
     let currentTemperatureCelsius: String
     let maxTemperatureCelsius: String
     let minTemperatureCelsius: String
-    let description: String
     let dt: Int
 
     init?(forecast: Forecast) {
@@ -32,8 +31,6 @@ class ForecastViewModel {
         self.currentTemperatureCelsius = Self.convertTemp(temp: Double(forecast.main.tempMin), from: .kelvin, to: .celsius)
         self.maxTemperatureCelsius = Self.convertTemp(temp: Double(forecast.main.tempMin), from: .kelvin, to: .celsius)
         self.minTemperatureCelsius = Self.convertTemp(temp: Double(forecast.main.tempMin), from: .kelvin, to: .celsius)
-
-        self.description = weather.description
 
         self.dt = forecast.dt
     }

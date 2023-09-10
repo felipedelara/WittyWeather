@@ -35,8 +35,9 @@ struct CityListView: View {
                         .padding()
 
                     Button("Try again") {
+
                         Task {
-                            await viewModel.getCities(query: "Curitiba")
+                            await viewModel.getCities(query: (viewModel.searchQuery.isEmpty ? "Lisbon" : viewModel.searchQuery))
                         }
                     }
                     .padding(.horizontal, 20)
@@ -65,7 +66,7 @@ struct PrimaryButtonStyle: ButtonStyle {
             .foregroundColor(.white)
             .padding()
             .frame(maxWidth: .infinity)
-            .background(configuration.isPressed ? Color.yellow.opacity(0.8) : Color.yellow)
+            .background(configuration.isPressed ? Color.blue.opacity(0.8) : Color.blue)
             .cornerRadius(10)
     }
 }

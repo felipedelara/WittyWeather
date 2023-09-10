@@ -14,6 +14,7 @@ class IconViewModel: ObservableObject {
 
         case loading
         case content(UIImage)
+        case error
     }
 
     @Published var state: ViewState = .loading
@@ -50,7 +51,7 @@ class IconViewModel: ObservableObject {
 
         } catch {
 
-            print(error)
+            self.state = .error
         }
     }
 }

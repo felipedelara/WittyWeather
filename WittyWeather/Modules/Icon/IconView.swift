@@ -22,6 +22,13 @@ struct IconView: View {
                 .resizable()
                 .scaledToFit()
                 .frame(width: 60.0, height: 60.0)
+        case .error:
+            Image(systemName: "photo")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 60.0, height: 60.0)
+                .foregroundColor(.gray)
+                .opacity(0.2)
         }
     }
 }

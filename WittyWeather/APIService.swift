@@ -30,6 +30,8 @@ class APIService: APIServiceType {
 
     func getForecast(city: City) async throws -> ForecastResponse {
 
+        // Request
+
         guard let url = URL(string: "https://api.openweathermap.org/data/2.5/forecast?lat=\(city.lat)&lon=\(city.lon)&appid=\(apiKey)") else {
 
             throw ServiceError.invalidUrl
@@ -40,7 +42,6 @@ class APIService: APIServiceType {
         do {
 
             let (data, _) = try await URLSession.shared.data(for: request)
-
             let model = try JSONDecoder().decode(ForecastResponse.self, from: data)
             return model
 
@@ -52,12 +53,9 @@ class APIService: APIServiceType {
 
     func getCity(cityName: String) async throws -> [City] {
 
-        //Sanitize
-
-        let sanitizedQuery = cityName.replacingOccurrences(of: " ", with: "%20")
-
-        //HTTP
-        guard let url = URL(string: "https://api.openweathermap.org/geo/1.0/direct?q=\(sanitizedQuery)&limit=5&appid=\(apiKey)") else {
+        print("https://api.openweathermap.org/geo/1.0/direct?q=\(cityName.encodeStringForURL())&limit=5&appid=\(apiKey)")
+        // Request
+        guard let url = URL(string: "https://api.openweathermap.org/geo/1.0/direct?q=\(cityName.encodeStringForURL())&limit=5&appid=\(apiKey)") else {
 
             throw ServiceError.invalidUrl
         }
@@ -69,6 +67,7 @@ class APIService: APIServiceType {
             let (data, _) = try await URLSession.shared.data(for: request)
             let model = try JSONDecoder().decode([City].self, from: data)
             return model
+
         } catch {
 
             throw error
@@ -77,7 +76,7 @@ class APIService: APIServiceType {
 
     func getIcon(iconDesc: String) async throws -> UIImage {
 
-        //HTTP
+        // Request
         guard let url = URL(string: "https://openweathermap.org/img/wn/\(iconDesc)@2x.png") else {
 
             throw ServiceError.invalidUrl
@@ -101,5 +100,14 @@ class APIService: APIServiceType {
 
             throw error
         }
+    }
+}
+
+extension String {
+
+    func encodeStringForURL() -> String {
+
+        let allowedCharacterSet = CharacterSet(charactersIn: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~%")
+        return self.replacingOccurrences(of: " ", with: "%20").addingPercentEncoding(withAllowedCharacters: allowedCharacterSet) ?? ""
     }
 }
