@@ -33,13 +33,22 @@ struct CityForecastView: View {
 
                             ForEach(dayForecasts, id: \.dt) { forecast in
 
-                                VStack(alignment: .leading) {
-                                    Text(forecast.hour)
-                                    Text(forecast.day)
+                                HStack {
 
-                                    Text("Temp. \(forecast.currentTemperatureCelsius)")
-                                    Text("Max. \(forecast.maxTemperatureCelsius)")
-                                    Text("Min. \(forecast.minTemperatureCelsius)")
+                                    Text(forecast.hour)
+                                        .font(.headline)
+
+
+                                    VStack(alignment: .leading) {
+
+                                        Text(forecast.description).font(.subheadline)
+
+                                        Text("Temp. \(forecast.currentTemperatureCelsius)").font(.subheadline)
+                                        Text("Max. \(forecast.maxTemperatureCelsius)").font(.subheadline)
+                                        Text("Min. \(forecast.minTemperatureCelsius)").font(.subheadline)
+                                    }
+                                    Spacer()
+                                    IconView(viewModel: IconViewModel(iconDesc: forecast.icon))
                                 }
                             }
                         }

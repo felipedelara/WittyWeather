@@ -12,7 +12,7 @@ class ForecastViewModel {
 
     let day: String
     let hour: String
-    let icon: () -> Image
+    let icon: String
     let currentTemperatureCelsius: String
     let maxTemperatureCelsius: String
     let minTemperatureCelsius: String
@@ -27,10 +27,7 @@ class ForecastViewModel {
 
         self.hour = forecast.dtTxt.hourFromDate()
 
-        self.icon = {
-
-            return Image("sun.min")
-        }
+        self.icon = weather.icon
 
         self.currentTemperatureCelsius = Self.convertTemp(temp: Double(forecast.main.tempMin), from: .kelvin, to: .celsius)
         self.maxTemperatureCelsius = Self.convertTemp(temp: Double(forecast.main.tempMin), from: .kelvin, to: .celsius)

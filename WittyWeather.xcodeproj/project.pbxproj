@@ -15,6 +15,8 @@
 		E86639ED2AAD338D0018FD28 /* CityForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E86639EC2AAD338D0018FD28 /* CityForecastView.swift */; };
 		E8D3C63A2AADF65C006E4EC0 /* ForecastListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D3C6392AADF65C006E4EC0 /* ForecastListViewModel.swift */; };
 		E8D3C63C2AADF671006E4EC0 /* ForecastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D3C63B2AADF671006E4EC0 /* ForecastViewModel.swift */; };
+		E8D3C63F2AAE14BC006E4EC0 /* IconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D3C63E2AAE14BC006E4EC0 /* IconView.swift */; };
+		E8D3C6412AAE14C5006E4EC0 /* IconViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D3C6402AAE14C5006E4EC0 /* IconViewModel.swift */; };
 		E8FE0E702AAA3B2D0065D8D0 /* WittyWeatherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FE0E6F2AAA3B2D0065D8D0 /* WittyWeatherApp.swift */; };
 		E8FE0E722AAA3B2D0065D8D0 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FE0E712AAA3B2D0065D8D0 /* Persistence.swift */; };
 		E8FE0E752AAA3B2D0065D8D0 /* WittyWeather.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E8FE0E732AAA3B2D0065D8D0 /* WittyWeather.xcdatamodeld */; };
@@ -51,6 +53,8 @@
 		E86639EC2AAD338D0018FD28 /* CityForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityForecastView.swift; sourceTree = "<group>"; };
 		E8D3C6392AADF65C006E4EC0 /* ForecastListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastListViewModel.swift; sourceTree = "<group>"; };
 		E8D3C63B2AADF671006E4EC0 /* ForecastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastViewModel.swift; sourceTree = "<group>"; };
+		E8D3C63E2AAE14BC006E4EC0 /* IconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconView.swift; sourceTree = "<group>"; };
+		E8D3C6402AAE14C5006E4EC0 /* IconViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconViewModel.swift; sourceTree = "<group>"; };
 		E8FE0E6C2AAA3B2D0065D8D0 /* WittyWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WittyWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8FE0E6F2AAA3B2D0065D8D0 /* WittyWeatherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WittyWeatherApp.swift; sourceTree = "<group>"; };
 		E8FE0E712AAA3B2D0065D8D0 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -103,6 +107,7 @@
 		E86639EA2AAD319D0018FD28 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				E8D3C63D2AAE14AB006E4EC0 /* Icon */,
 				E86639E92AAD318E0018FD28 /* CityList */,
 				E86639EB2AAD33770018FD28 /* CityForecast */,
 			);
@@ -117,6 +122,15 @@
 				E8D3C63B2AADF671006E4EC0 /* ForecastViewModel.swift */,
 			);
 			path = CityForecast;
+			sourceTree = "<group>";
+		};
+		E8D3C63D2AAE14AB006E4EC0 /* Icon */ = {
+			isa = PBXGroup;
+			children = (
+				E8D3C63E2AAE14BC006E4EC0 /* IconView.swift */,
+				E8D3C6402AAE14C5006E4EC0 /* IconViewModel.swift */,
+			);
+			path = Icon;
 			sourceTree = "<group>";
 		};
 		E8FE0E632AAA3B2D0065D8D0 = {
@@ -311,6 +325,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E8FE0E752AAA3B2D0065D8D0 /* WittyWeather.xcdatamodeld in Sources */,
+				E8D3C63F2AAE14BC006E4EC0 /* IconView.swift in Sources */,
 				E8FE0E702AAA3B2D0065D8D0 /* WittyWeatherApp.swift in Sources */,
 				E86639E42AACED0D0018FD28 /* CityListView.swift in Sources */,
 				E86639E62AACF8A70018FD28 /* CityListViewModel.swift in Sources */,
@@ -319,6 +334,7 @@
 				E86639ED2AAD338D0018FD28 /* CityForecastView.swift in Sources */,
 				E86639E22AAA8D5D0018FD28 /* APIService.swift in Sources */,
 				E8D3C63C2AADF671006E4EC0 /* ForecastViewModel.swift in Sources */,
+				E8D3C6412AAE14C5006E4EC0 /* IconViewModel.swift in Sources */,
 				E8D3C63A2AADF65C006E4EC0 /* ForecastListViewModel.swift in Sources */,
 				E86639E02AAA8D370018FD28 /* Models.swift in Sources */,
 			);

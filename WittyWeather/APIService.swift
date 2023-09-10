@@ -6,27 +6,27 @@
 //
 
 import Foundation
+import UIKit
 
 enum ServiceError: Error {
 
     case noToken
     case invalidUrl
     case genericError
+    case badImageFromDataConversion
 }
 
 protocol APIServiceType {
 
     func getForecast(city: City) async throws -> ForecastResponse
     func getCity(cityName: String) async throws -> [City]
+    func getIcon(iconDesc: String) async throws -> UIImage
 }
 
 class APIService: APIServiceType {
 
     let apiKey = "7e54064d8356179a0eeeb730c642071b"
 
-    var lat: String = "38.7095641817862"
-    let lon: String = "-9.138063509914675"
-    let dayCount: Int = 5
 
     func getForecast(city: City) async throws -> ForecastResponse {
 
@@ -42,12 +42,10 @@ class APIService: APIServiceType {
             let (data, _) = try await URLSession.shared.data(for: request)
 
             let model = try JSONDecoder().decode(ForecastResponse.self, from: data)
-            print(model)
             return model
 
         } catch {
 
-            print(error)
             throw error
         }
     }
@@ -64,19 +62,43 @@ class APIService: APIServiceType {
             throw ServiceError.invalidUrl
         }
 
+        let request = URLRequest(url: url)
+
+        do {
+
+            let (data, _) = try await URLSession.shared.data(for: request)
+            let model = try JSONDecoder().decode([City].self, from: data)
+            return model
+        } catch {
+
+            throw error
+        }
+    }
+
+    func getIcon(iconDesc: String) async throws -> UIImage {
+
+        //HTTP
+        guard let url = URL(string: "https://openweathermap.org/img/wn/\(iconDesc)@2x.png") else {
+
+            throw ServiceError.invalidUrl
+        }
+
         var request = URLRequest(url: url)
+        request.cachePolicy = .returnCacheDataElseLoad // This is enough to ensure image caching
 
         do {
 
             let (data, _) = try await URLSession.shared.data(for: request)
 
-            let model = try JSONDecoder().decode([City].self, from: data)
-            print(model)
-            return model
+            guard let image = UIImage(data: data) else {
+
+                throw ServiceError.badImageFromDataConversion
+            }
+
+            return image
 
         } catch {
 
-            print(error)
             throw error
         }
     }

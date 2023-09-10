@@ -20,7 +20,6 @@ class ForecastListViewModel: ObservableObject {
 
     private var apiService: APIServiceType
 
-
     init(apiService: APIServiceType = APIService()) {
 
         self.apiService = apiService
@@ -66,7 +65,7 @@ class ForecastListViewModel: ObservableObject {
                     self.state = .error("No API token found. Please go to Settings and insert one.")
                 case .invalidUrl:
                     self.state = .error("An invalid request has been attempted. Please contact support.")
-                case .none, .genericError:
+                case .none, .genericError, .badImageFromDataConversion:
                     self.state = .error(error.localizedDescription)
                 }
             }
