@@ -7,8 +7,12 @@
 
 import Foundation
 import Combine
+import CoreData
+import SwiftUI
 
 class CityListViewModel: ObservableObject {
+
+    private (set) var managedObjectContext: NSManagedObjectContext
 
     var allCities: Set<City> = [] // Sets will avoid duplicates
 
@@ -28,16 +32,16 @@ class CityListViewModel: ObservableObject {
 
     private var apiService: APIServiceType
 
-    init(apiService: APIServiceType = APIService()) {
+    init(apiService: APIServiceType = APIService(),
+         managedObjectContext: NSManagedObjectContext) {
 
         self.apiService = apiService
 
+        self.managedObjectContext = managedObjectContext
+
         self.state = .loading
 
-        Task {
-
-            await self.getCities(query: "Lisbon")
-        }
+        self.getLocalCities()
 
         $searchQuery
             .dropFirst(1)
@@ -62,6 +66,54 @@ class CityListViewModel: ObservableObject {
             }.store(in: &subscription)
     }
 
+    func getLocalCities() {
+
+        let fetchRequest: NSFetchRequest<CoreCity> = CoreCity.fetchRequest()
+
+        do {
+
+            let coreCities = try managedObjectContext.fetch(fetchRequest)
+
+            var normalCities = [City]()
+
+            for coreCity in coreCities {
+
+                guard let name = coreCity.name, let country = coreCity.country, let state = coreCity.state else {
+
+                    continue
+                }
+
+                normalCities.append(City(name: name,
+                                         localNames: nil,
+                                         lat: coreCity.lat,
+                                         lon: coreCity.lon,
+                                         country: country,
+                                         state: state))
+            }
+
+            if normalCities.isEmpty {
+
+                Task {
+
+                    await self.getCities(query: "Lisbon")
+                }
+
+            } else {
+
+                self.allCities.formUnion(normalCities)
+                self.state = .content(normalCities)
+            }
+
+        } catch {
+
+            // Fallback to getting one demo city
+            Task {
+
+                await self.getCities(query: "Lisbon")
+            }
+        }
+    }
+
     // MARK: - Functions
     func getCities(query: String) async {
 
@@ -69,13 +121,26 @@ class CityListViewModel: ObservableObject {
 
             let cities = try await apiService.getCity(cityName: query)
 
+            for city in cities {
+
+                let coreCity = CoreCity(context: managedObjectContext)
+                coreCity.name = city.name
+                coreCity.lon = city.lon
+                coreCity.lat = city.lat
+                coreCity.country = city.country
+                coreCity.state = city.state
+            }
+
+            try? managedObjectContext.save()
+
             DispatchQueue.main.async {
 
                 self.allCities.formUnion(cities)
                 self.state = .content(cities)
             }
+            
         } catch {
-
+            
             DispatchQueue.main.async {
 
                 switch error as? ServiceError {

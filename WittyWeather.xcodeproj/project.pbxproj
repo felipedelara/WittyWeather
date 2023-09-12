@@ -20,6 +20,10 @@
 		E89727DB2AAE70EE0055884B /* CityListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89727DA2AAE70EE0055884B /* CityListViewModelTests.swift */; };
 		E89727DE2AAE73480055884B /* ForecastListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89727DD2AAE73480055884B /* ForecastListViewModelTests.swift */; };
 		E89727E02AAE76520055884B /* TemperatureConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89727DF2AAE76520055884B /* TemperatureConverterTests.swift */; };
+		E89727E52AB10F9C0055884B /* WittyWeather.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E89727E32AB10F9C0055884B /* WittyWeather.xcdatamodeld */; };
+		E89727E72AB110A40055884B /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89727E62AB110A40055884B /* DataController.swift */; };
+		E89727EA2AB11ECE0055884B /* CoreCity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89727E82AB11ECE0055884B /* CoreCity+CoreDataClass.swift */; };
+		E89727EB2AB11ECE0055884B /* CoreCity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89727E92AB11ECE0055884B /* CoreCity+CoreDataProperties.swift */; };
 		E8D3C63A2AADF65C006E4EC0 /* ForecastListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D3C6392AADF65C006E4EC0 /* ForecastListViewModel.swift */; };
 		E8D3C63C2AADF671006E4EC0 /* ForecastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D3C63B2AADF671006E4EC0 /* ForecastViewModel.swift */; };
 		E8D3C63F2AAE14BC006E4EC0 /* IconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D3C63E2AAE14BC006E4EC0 /* IconView.swift */; };
@@ -27,7 +31,6 @@
 		E8D3C6482AAE3F97006E4EC0 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D3C6472AAE3F97006E4EC0 /* String.swift */; };
 		E8D3C64B2AAE3FE7006E4EC0 /* PrimaryButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D3C64A2AAE3FE7006E4EC0 /* PrimaryButtonStyle.swift */; };
 		E8FE0E702AAA3B2D0065D8D0 /* WittyWeatherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FE0E6F2AAA3B2D0065D8D0 /* WittyWeatherApp.swift */; };
-		E8FE0E752AAA3B2D0065D8D0 /* WittyWeather.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E8FE0E732AAA3B2D0065D8D0 /* WittyWeather.xcdatamodeld */; };
 		E8FE0E792AAA3B360065D8D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8FE0E782AAA3B360065D8D0 /* Assets.xcassets */; };
 		E8FE0E7D2AAA3B360065D8D0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8FE0E7C2AAA3B360065D8D0 /* Preview Assets.xcassets */; };
 		E8FE0E912AAA3B360065D8D0 /* WittyWeatherUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FE0E902AAA3B360065D8D0 /* WittyWeatherUITests.swift */; };
@@ -65,6 +68,10 @@
 		E89727DA2AAE70EE0055884B /* CityListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityListViewModelTests.swift; sourceTree = "<group>"; };
 		E89727DD2AAE73480055884B /* ForecastListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastListViewModelTests.swift; sourceTree = "<group>"; };
 		E89727DF2AAE76520055884B /* TemperatureConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureConverterTests.swift; sourceTree = "<group>"; };
+		E89727E42AB10F9C0055884B /* WittyWeatherModels.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WittyWeatherModels.xcdatamodel; sourceTree = "<group>"; };
+		E89727E62AB110A40055884B /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		E89727E82AB11ECE0055884B /* CoreCity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreCity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		E89727E92AB11ECE0055884B /* CoreCity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreCity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E8D3C6392AADF65C006E4EC0 /* ForecastListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastListViewModel.swift; sourceTree = "<group>"; };
 		E8D3C63B2AADF671006E4EC0 /* ForecastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastViewModel.swift; sourceTree = "<group>"; };
 		E8D3C63E2AAE14BC006E4EC0 /* IconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconView.swift; sourceTree = "<group>"; };
@@ -73,7 +80,6 @@
 		E8D3C64A2AAE3FE7006E4EC0 /* PrimaryButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButtonStyle.swift; sourceTree = "<group>"; };
 		E8FE0E6C2AAA3B2D0065D8D0 /* WittyWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WittyWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8FE0E6F2AAA3B2D0065D8D0 /* WittyWeatherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WittyWeatherApp.swift; sourceTree = "<group>"; };
-		E8FE0E742AAA3B2D0065D8D0 /* WittyWeather.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WittyWeather.xcdatamodel; sourceTree = "<group>"; };
 		E8FE0E782AAA3B360065D8D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E8FE0E7A2AAA3B360065D8D0 /* WittyWeather.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WittyWeather.entitlements; sourceTree = "<group>"; };
 		E8FE0E7C2AAA3B360065D8D0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -147,6 +153,17 @@
 			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
+		E89727EE2AB123B40055884B /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				E89727E62AB110A40055884B /* DataController.swift */,
+				E89727E32AB10F9C0055884B /* WittyWeather.xcdatamodeld */,
+				E89727E82AB11ECE0055884B /* CoreCity+CoreDataClass.swift */,
+				E89727E92AB11ECE0055884B /* CoreCity+CoreDataProperties.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 		E8D3C63D2AAE14AB006E4EC0 /* Icon */ = {
 			isa = PBXGroup;
 			children = (
@@ -189,12 +206,14 @@
 			path = Button;
 			sourceTree = "<group>";
 		};
-		E8D3C64C2AAE4B58006E4EC0 /* API */ = {
+		E8D3C64C2AAE4B58006E4EC0 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				E89727EE2AB123B40055884B /* CoreData */,
+				E8D3C6432AAE3F53006E4EC0 /* Models */,
 				E86639E12AAA8D5D0018FD28 /* APIService.swift */,
 			);
-			path = API;
+			path = Data;
 			sourceTree = "<group>";
 		};
 		E8FE0E632AAA3B2D0065D8D0 = {
@@ -220,15 +239,13 @@
 		E8FE0E6E2AAA3B2D0065D8D0 /* WittyWeather */ = {
 			isa = PBXGroup;
 			children = (
+				E8FE0E782AAA3B360065D8D0 /* Assets.xcassets */,
+				E8FE0E7A2AAA3B360065D8D0 /* WittyWeather.entitlements */,
 				E8FE0E6F2AAA3B2D0065D8D0 /* WittyWeatherApp.swift */,
 				E8D3C6422AAE3F3E006E4EC0 /* UI */,
 				E86639EA2AAD319D0018FD28 /* Modules */,
 				E8D3C6462AAE3F88006E4EC0 /* Extensions */,
-				E8D3C6432AAE3F53006E4EC0 /* Models */,
-				E8D3C64C2AAE4B58006E4EC0 /* API */,
-				E8FE0E7A2AAA3B360065D8D0 /* WittyWeather.entitlements */,
-				E8FE0E782AAA3B360065D8D0 /* Assets.xcassets */,
-				E8FE0E732AAA3B2D0065D8D0 /* WittyWeather.xcdatamodeld */,
+				E8D3C64C2AAE4B58006E4EC0 /* Data */,
 				E8FE0E7B2AAA3B360065D8D0 /* Preview Content */,
 			);
 			path = WittyWeather;
@@ -396,18 +413,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				E8D3C64B2AAE3FE7006E4EC0 /* PrimaryButtonStyle.swift in Sources */,
-				E8FE0E752AAA3B2D0065D8D0 /* WittyWeather.xcdatamodeld in Sources */,
 				E8D3C6482AAE3F97006E4EC0 /* String.swift in Sources */,
 				E8D3C63F2AAE14BC006E4EC0 /* IconView.swift in Sources */,
 				E8FE0E702AAA3B2D0065D8D0 /* WittyWeatherApp.swift in Sources */,
 				E86639E42AACED0D0018FD28 /* CityListView.swift in Sources */,
 				E86639E62AACF8A70018FD28 /* CityListViewModel.swift in Sources */,
+				E89727EB2AB11ECE0055884B /* CoreCity+CoreDataProperties.swift in Sources */,
+				E89727E52AB10F9C0055884B /* WittyWeather.xcdatamodeld in Sources */,
 				E86639E82AAD16820018FD28 /* CityItemView.swift in Sources */,
 				E86639ED2AAD338D0018FD28 /* ForecastListView.swift in Sources */,
 				E86639E22AAA8D5D0018FD28 /* APIService.swift in Sources */,
 				E8D3C63C2AADF671006E4EC0 /* ForecastViewModel.swift in Sources */,
 				E8D3C6412AAE14C5006E4EC0 /* IconViewModel.swift in Sources */,
+				E89727E72AB110A40055884B /* DataController.swift in Sources */,
 				E8D3C63A2AADF65C006E4EC0 /* ForecastListViewModel.swift in Sources */,
+				E89727EA2AB11ECE0055884B /* CoreCity+CoreDataClass.swift in Sources */,
 				E86639E02AAA8D370018FD28 /* APIModels.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -766,12 +786,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		E8FE0E732AAA3B2D0065D8D0 /* WittyWeather.xcdatamodeld */ = {
+		E89727E32AB10F9C0055884B /* WittyWeather.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				E8FE0E742AAA3B2D0065D8D0 /* WittyWeather.xcdatamodel */,
+				E89727E42AB10F9C0055884B /* WittyWeatherModels.xcdatamodel */,
 			);
-			currentVersion = E8FE0E742AAA3B2D0065D8D0 /* WittyWeather.xcdatamodel */;
+			currentVersion = E89727E42AB10F9C0055884B /* WittyWeatherModels.xcdatamodel */;
 			path = WittyWeather.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

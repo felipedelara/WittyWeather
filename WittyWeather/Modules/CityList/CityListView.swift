@@ -10,7 +10,7 @@ import SwiftUI
 
 struct CityListView: View {
 
-    @StateObject private var viewModel = CityListViewModel()
+    @StateObject var viewModel: CityListViewModel
 
     var body: some View {
         NavigationView {
@@ -46,13 +46,5 @@ struct CityListView: View {
                 }
             }
         }
-    }
-}
-
-struct SearchView_Previews: PreviewProvider {
-
-    static var previews: some View {
-
-        CityListView()
     }
 }

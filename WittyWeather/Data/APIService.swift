@@ -27,7 +27,6 @@ class APIService: APIServiceType {
 
     let apiKey = "7e54064d8356179a0eeeb730c642071b"
 
-
     func getForecast(city: City) async throws -> ForecastResponse {
 
         guard let url = URL(string: "https://api.openweathermap.org/data/2.5/forecast?lat=\(city.lat)&lon=\(city.lon)&appid=\(apiKey)") else {
