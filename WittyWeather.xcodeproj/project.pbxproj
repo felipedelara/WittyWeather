@@ -164,6 +164,8 @@
 				E89727E62AB110A40055884B /* DataController.swift */,
 				E89727E82AB11ECE0055884B /* CoreCity+CoreDataClass.swift */,
 				E89727E92AB11ECE0055884B /* CoreCity+CoreDataProperties.swift */,
+				E89727FD2AB277CD0055884B /* CoreForecast+CoreDataClass.swift */,
+				E89727FE2AB277CD0055884B /* CoreForecast+CoreDataProperties.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -223,8 +225,6 @@
 		E8FE0E632AAA3B2D0065D8D0 = {
 			isa = PBXGroup;
 			children = (
-				E89727FD2AB277CD0055884B /* CoreForecast+CoreDataClass.swift */,
-				E89727FE2AB277CD0055884B /* CoreForecast+CoreDataProperties.swift */,
 				E8FE0E6E2AAA3B2D0065D8D0 /* WittyWeather */,
 				E8FE0E852AAA3B360065D8D0 /* WittyWeatherTests */,
 				E8FE0E8F2AAA3B360065D8D0 /* WittyWeatherUITests */,
