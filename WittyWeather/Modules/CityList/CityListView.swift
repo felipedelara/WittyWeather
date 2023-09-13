@@ -37,7 +37,7 @@ struct CityListView: View {
                     Button("Try again") {
 
                         Task {
-                            await viewModel.getCities(query: (viewModel.searchQuery.isEmpty ? "Lisbon" : viewModel.searchQuery))
+                            await viewModel.getMoreCities(query: (viewModel.searchQuery.isEmpty ? "Lisbon" : viewModel.searchQuery))
                         }
                     }
                     .padding(.horizontal, 20)

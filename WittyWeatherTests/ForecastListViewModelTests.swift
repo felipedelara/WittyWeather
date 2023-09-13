@@ -63,7 +63,7 @@ class ForecastListViewModelTests: XCTestCase {
 
         // Act
         Task {
-            await viewModel.getCities(query: "mock")
+            await viewModel.getMoreCities(query: "mock")
 
             try? await Task.sleep(nanoseconds: 500_000_000)
 

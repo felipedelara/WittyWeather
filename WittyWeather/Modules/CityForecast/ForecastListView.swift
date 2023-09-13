@@ -33,9 +33,7 @@ struct CityForecastItemView: View {
 
 struct ForecastListView: View {
 
-    let city: City
-
-    @StateObject var viewModel = ForecastListViewModel()
+    @StateObject var viewModel: ForecastListViewModel
 
     var body: some View {
 
@@ -85,9 +83,10 @@ struct ForecastListView: View {
 
             Task {
 
-                await viewModel.getForecast(city: self.city)
+                await viewModel.loadForecast()
             }
-        }.navigationBarTitle("\(city.name)'s forecast")
+
+        }.navigationBarTitle("\(self.viewModel.city.name)'s forecast")
     }
     
 }
@@ -98,6 +97,6 @@ struct ForecastListView_Previews: PreviewProvider {
 
         let sampleCity = City(name: "New York", localNames: ["en": "New York"], lat: 40.7128, lon: -74.0060, country: "US", state: "NY")
 
-        return ForecastListView(city: sampleCity)
+        return ForecastListView(viewModel: ForecastListViewModel(city: sampleCity))
     }
 }

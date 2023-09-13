@@ -12,10 +12,6 @@ import SwiftUI
 
 class CityListViewModel: ObservableObject {
 
-    private (set) var managedObjectContext: NSManagedObjectContext
-
-    var allCities: Set<City> = [] // Sets will avoid duplicates
-
     enum ViewState {
 
         case loading
@@ -23,25 +19,25 @@ class CityListViewModel: ObservableObject {
         case error(String)
     }
 
-    // MARK: - Published properties
+    // MARK: Private properties
+    private var allCities: Set<City> = [] // Sets will avoid duplicates
+    private var apiService: APIServiceType
+    private var subscription: Set<AnyCancellable> = []
+    private (set) var managedObjectContext: NSManagedObjectContext
+
+    // MARK: Published properties
     @Published var state: ViewState = .loading
-
-    var subscription: Set<AnyCancellable> = []
-
     @Published var searchQuery: String = String()
 
-    private var apiService: APIServiceType
-
+    // MARK: Lifecycle
     init(apiService: APIServiceType = APIService(),
          managedObjectContext: NSManagedObjectContext) {
 
         self.apiService = apiService
-
         self.managedObjectContext = managedObjectContext
-
         self.state = .loading
 
-        self.getLocalCities()
+        self.loadCities()
 
         $searchQuery
             .dropFirst(1)
@@ -61,12 +57,48 @@ class CityListViewModel: ObservableObject {
 
                 Task {
 
-                    await self.getCities(query: query)
+                    await self.getMoreCities(query: query)
                 }
             }.store(in: &subscription)
     }
 
-    func getLocalCities() {
+    // MARK: - Public functions
+    func getMoreCities(query: String) async {
+
+        do {
+
+            let cities = try await apiService.getCity(cityName: query)
+
+            self.saveLocalCities(cities)
+
+            DispatchQueue.main.async {
+
+                self.allCities.formUnion(cities)
+                self.state = .content(cities)
+            }
+            
+        } catch {
+            
+            DispatchQueue.main.async {
+
+                switch error as? ServiceError {
+
+                case .noToken:
+                    self.state = .error("No API token found. Please go to Settings and insert one.")
+                case .invalidUrl:
+                    self.state = .error("An invalid request has been attempted. Please contact support.")
+                default:
+                    self.state = .error(error.localizedDescription)
+                }
+            }
+        }
+    }
+}
+
+// MARK: - Private functions
+private extension CityListViewModel {
+
+    func loadCities() {
 
         let fetchRequest: NSFetchRequest<CoreCity> = CoreCity.fetchRequest()
 
@@ -93,9 +125,10 @@ class CityListViewModel: ObservableObject {
 
             if normalCities.isEmpty {
 
+                // Fallback to listing default city
                 Task {
 
-                    await self.getCities(query: "Lisbon")
+                    await self.getMoreCities(query: "Lisbon")
                 }
 
             } else {
@@ -106,53 +139,26 @@ class CityListViewModel: ObservableObject {
 
         } catch {
 
-            // Fallback to getting one demo city
+            // Fallback to listing default city
             Task {
 
-                await self.getCities(query: "Lisbon")
+                await self.getMoreCities(query: "Lisbon")
             }
         }
     }
 
-    // MARK: - Functions
-    func getCities(query: String) async {
+    func saveLocalCities(_ cities: [City]) {
 
-        do {
+        for city in cities {
 
-            let cities = try await apiService.getCity(cityName: query)
-
-            for city in cities {
-
-                let coreCity = CoreCity(context: managedObjectContext)
-                coreCity.name = city.name
-                coreCity.lon = city.lon
-                coreCity.lat = city.lat
-                coreCity.country = city.country
-                coreCity.state = city.state
-            }
-
-            try? managedObjectContext.save()
-
-            DispatchQueue.main.async {
-
-                self.allCities.formUnion(cities)
-                self.state = .content(cities)
-            }
-            
-        } catch {
-            
-            DispatchQueue.main.async {
-
-                switch error as? ServiceError {
-
-                case .noToken:
-                    self.state = .error("No API token found. Please go to Settings and insert one.")
-                case .invalidUrl:
-                    self.state = .error("An invalid request has been attempted. Please contact support.")
-                default:
-                    self.state = .error(error.localizedDescription)
-                }
-            }
+            let coreCity = CoreCity(context: self.managedObjectContext)
+            coreCity.name = city.name
+            coreCity.lon = city.lon
+            coreCity.lat = city.lat
+            coreCity.country = city.country
+            coreCity.state = city.state
         }
+
+        try? self.managedObjectContext.save()
     }
 }

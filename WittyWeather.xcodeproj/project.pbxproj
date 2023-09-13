@@ -24,6 +24,8 @@
 		E89727E72AB110A40055884B /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89727E62AB110A40055884B /* DataController.swift */; };
 		E89727EA2AB11ECE0055884B /* CoreCity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89727E82AB11ECE0055884B /* CoreCity+CoreDataClass.swift */; };
 		E89727EB2AB11ECE0055884B /* CoreCity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89727E92AB11ECE0055884B /* CoreCity+CoreDataProperties.swift */; };
+		E89727FF2AB277CD0055884B /* CoreForecast+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89727FD2AB277CD0055884B /* CoreForecast+CoreDataClass.swift */; };
+		E89728002AB277CD0055884B /* CoreForecast+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89727FE2AB277CD0055884B /* CoreForecast+CoreDataProperties.swift */; };
 		E8D3C63A2AADF65C006E4EC0 /* ForecastListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D3C6392AADF65C006E4EC0 /* ForecastListViewModel.swift */; };
 		E8D3C63C2AADF671006E4EC0 /* ForecastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D3C63B2AADF671006E4EC0 /* ForecastViewModel.swift */; };
 		E8D3C63F2AAE14BC006E4EC0 /* IconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D3C63E2AAE14BC006E4EC0 /* IconView.swift */; };
@@ -72,6 +74,8 @@
 		E89727E62AB110A40055884B /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		E89727E82AB11ECE0055884B /* CoreCity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreCity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E89727E92AB11ECE0055884B /* CoreCity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreCity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		E89727FD2AB277CD0055884B /* CoreForecast+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreForecast+CoreDataClass.swift"; sourceTree = "<group>"; };
+		E89727FE2AB277CD0055884B /* CoreForecast+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreForecast+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E8D3C6392AADF65C006E4EC0 /* ForecastListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastListViewModel.swift; sourceTree = "<group>"; };
 		E8D3C63B2AADF671006E4EC0 /* ForecastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastViewModel.swift; sourceTree = "<group>"; };
 		E8D3C63E2AAE14BC006E4EC0 /* IconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconView.swift; sourceTree = "<group>"; };
@@ -156,8 +160,8 @@
 		E89727EE2AB123B40055884B /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				E89727E62AB110A40055884B /* DataController.swift */,
 				E89727E32AB10F9C0055884B /* WittyWeather.xcdatamodeld */,
+				E89727E62AB110A40055884B /* DataController.swift */,
 				E89727E82AB11ECE0055884B /* CoreCity+CoreDataClass.swift */,
 				E89727E92AB11ECE0055884B /* CoreCity+CoreDataProperties.swift */,
 			);
@@ -219,6 +223,8 @@
 		E8FE0E632AAA3B2D0065D8D0 = {
 			isa = PBXGroup;
 			children = (
+				E89727FD2AB277CD0055884B /* CoreForecast+CoreDataClass.swift */,
+				E89727FE2AB277CD0055884B /* CoreForecast+CoreDataProperties.swift */,
 				E8FE0E6E2AAA3B2D0065D8D0 /* WittyWeather */,
 				E8FE0E852AAA3B360065D8D0 /* WittyWeatherTests */,
 				E8FE0E8F2AAA3B360065D8D0 /* WittyWeatherUITests */,
@@ -412,6 +418,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E89727FF2AB277CD0055884B /* CoreForecast+CoreDataClass.swift in Sources */,
 				E8D3C64B2AAE3FE7006E4EC0 /* PrimaryButtonStyle.swift in Sources */,
 				E8D3C6482AAE3F97006E4EC0 /* String.swift in Sources */,
 				E8D3C63F2AAE14BC006E4EC0 /* IconView.swift in Sources */,
@@ -426,6 +433,7 @@
 				E8D3C63C2AADF671006E4EC0 /* ForecastViewModel.swift in Sources */,
 				E8D3C6412AAE14C5006E4EC0 /* IconViewModel.swift in Sources */,
 				E89727E72AB110A40055884B /* DataController.swift in Sources */,
+				E89728002AB277CD0055884B /* CoreForecast+CoreDataProperties.swift in Sources */,
 				E8D3C63A2AADF65C006E4EC0 /* ForecastListViewModel.swift in Sources */,
 				E89727EA2AB11ECE0055884B /* CoreCity+CoreDataClass.swift in Sources */,
 				E86639E02AAA8D370018FD28 /* APIModels.swift in Sources */,

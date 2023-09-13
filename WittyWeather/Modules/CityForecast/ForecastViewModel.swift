@@ -32,6 +32,25 @@ class ForecastViewModel {
 
         self.dt = forecast.dt
     }
+
+    init?(coreForecast: CoreForecast) {
+
+        guard let day = coreForecast.day,
+              let hour = coreForecast.hour,
+              let icon = coreForecast.icon,
+              let currentTemp = coreForecast.currentTemp,
+              let feelsLike = coreForecast.feelsLike else {
+
+            return nil
+        }
+
+        self.day = day
+        self.hour = hour
+        self.icon = icon
+        self.currentTemperatureCelsius = currentTemp
+        self.feelsLike = feelsLike
+        self.dt = Int(coreForecast.dt)
+    }
 }
 
 struct TemperatureConverter {

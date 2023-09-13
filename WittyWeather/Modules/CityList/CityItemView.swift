@@ -15,7 +15,7 @@ struct CityListItem: View {
 
     var body: some View {
 
-        NavigationLink(destination: ForecastListView(city: city)) {
+        NavigationLink(destination: ForecastListView(viewModel: ForecastListViewModel(city: city))) {
 
             HStack {
 

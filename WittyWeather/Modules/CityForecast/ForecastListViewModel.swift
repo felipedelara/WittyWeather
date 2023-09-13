@@ -6,7 +6,8 @@
 //
 
 import Foundation
-
+import CoreData
+import SwiftUI
 class ForecastListViewModel: ObservableObject {
 
     enum ViewState {
@@ -16,23 +17,30 @@ class ForecastListViewModel: ObservableObject {
         case error(String)
     }
 
+    // MARK: Private properties
+    private var apiService: APIServiceType
+    @Environment(\.managedObjectContext) var managedObjectContext
+
+    // MARK: Published properties
     @Published var state: ViewState = .loading
 
-    private var apiService: APIServiceType
+    let city: City
 
-    init(apiService: APIServiceType = APIService()) {
+    // MARK: Lifecycle
+    init(apiService: APIServiceType = APIService(),
+         city: City) {
 
         self.apiService = apiService
-
         self.state = .loading
+        self.city = city
     }
 
-    // MARK: - Functions
-    func getForecast(city: City) async {
+    // MARK: - Public functions
+    public func loadForecast() async {
 
         do {
 
-            let response = try await self.apiService.getForecast(city:city)
+            let response = try await self.apiService.getForecast(city: self.city)
 
             DispatchQueue.main.async {
 
@@ -55,6 +63,49 @@ class ForecastListViewModel: ObservableObject {
                 }
             }
         }
+    }
+}
+
+// MARK: - Private functions
+private extension ForecastListViewModel {
+
+    func saveForecastsLocally(_ forecastViewModels: [ForecastViewModel]) {
+
+        for forecastViewModel in forecastViewModels {
+
+            let coreForecast = CoreForecast(context: self.managedObjectContext)
+            coreForecast.currentTemp = forecastViewModel.currentTemperatureCelsius
+            coreForecast.day = forecastViewModel.day
+            coreForecast.hour = forecastViewModel.hour
+            coreForecast.icon = forecastViewModel.icon
+            coreForecast.feelsLike = forecastViewModel.feelsLike
+            coreForecast.dt = Int64(forecastViewModel.dt)
+
+            /*  This is where I realized I made a design mistake (still learning CoreData). Originally this had a relatioship with CoreCity.
+                CoreData wants to keep graph relations but I constructed it having in mind something closer to a relational database.
+                Workaroung: storing the hash of the city model, which will garantee me something closer to an ID that I can always recreate from the API models and fetch from CoreData.
+             */
+            coreForecast.cityHash = Int64(self.city.hashValue)
+        }
+    }
+
+    func loadStoredForecasts(for city: City) throws-> [ForecastViewModel] {
+
+        let fetchRequest: NSFetchRequest<CoreForecast> = CoreForecast.fetchRequest()
+
+        let coreForecasts = try managedObjectContext.fetch(fetchRequest)
+
+        var results = [ForecastViewModel]()
+
+        for coreForecast in coreForecasts {
+
+            if let forecastViewModel = ForecastViewModel(coreForecast: coreForecast) {
+
+                results.append(forecastViewModel)
+            }
+        }
+
+        return results
     }
 
     // Group forecasts by day
