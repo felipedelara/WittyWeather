@@ -25,7 +25,7 @@ protocol APIServiceType {
 
 class APIService: APIServiceType {
 
-    let apiKey = "7e54064d8356179a0eeeb730c642071b"
+    let apiKey = "7e54064d8356179a0eeeb730c642071b" // This key has been deleted before pushing. Use your own!
 
     func getForecast(city: City) async throws -> ForecastResponse {
 

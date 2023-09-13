@@ -23,7 +23,7 @@ class CityListViewModel: ObservableObject {
     private var allCities: Set<City> = [] // Sets will avoid duplicates
     private var apiService: APIServiceType
     private var subscription: Set<AnyCancellable> = []
-    private (set) var managedObjectContext: NSManagedObjectContext
+    private (set) var managedObjectContext: NSManagedObjectContext?
 
     // MARK: Published properties
     @Published var state: ViewState = .loading
@@ -31,7 +31,7 @@ class CityListViewModel: ObservableObject {
 
     // MARK: Lifecycle
     init(apiService: APIServiceType = APIService(),
-         managedObjectContext: NSManagedObjectContext) {
+         managedObjectContext: NSManagedObjectContext? = nil) {
 
         self.apiService = apiService
         self.managedObjectContext = managedObjectContext
@@ -100,6 +100,8 @@ private extension CityListViewModel {
 
     func loadCities() {
 
+        guard let managedObjectContext = self.managedObjectContext else { return }
+
         let fetchRequest: NSFetchRequest<CoreCity> = CoreCity.fetchRequest()
 
         do {
@@ -149,9 +151,11 @@ private extension CityListViewModel {
 
     func saveLocalCities(_ cities: [City]) {
 
+        guard let managedObjectContext = self.managedObjectContext else { return }
+
         for city in cities {
 
-            let coreCity = CoreCity(context: self.managedObjectContext)
+            let coreCity = CoreCity(context: managedObjectContext)
             coreCity.name = city.name
             coreCity.lon = city.lon
             coreCity.lat = city.lat
@@ -159,6 +163,6 @@ private extension CityListViewModel {
             coreCity.state = city.state
         }
 
-        try? self.managedObjectContext.save()
+        try? managedObjectContext.save()
     }
 }

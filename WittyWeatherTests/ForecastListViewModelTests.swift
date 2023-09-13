@@ -19,12 +19,12 @@ class ForecastListViewModelTests: XCTestCase {
 
         // Arrange
         let apiMock = APIServiceMock(shouldThrowError: false, defaultBoolResults: true)
-        let viewModel = ForecastListViewModel(apiService: apiMock)
+        let viewModel = ForecastListViewModel(apiService: apiMock, city: City(name: "MockCity", localNames: nil, lat: 0, lon: 0, country: "PT", state: nil))
         let expectation = XCTestExpectation(description: "Load forecasts with success")
 
         // Act
         Task {
-            await viewModel.getForecast(city: City(name: "MockCity", localNames: nil, lat: 0, lon: 0, country: "PT", state: nil))
+            await viewModel.loadForecast()
 
             try? await Task.sleep(nanoseconds: 500_000_000)
 

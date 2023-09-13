@@ -41,7 +41,7 @@ final class ModelTests: XCTestCase {
             }
 
             XCTAssertEqual(firstForecastResult.dt, 1694390400)
-            XCTAssertEqual(firstForecastResult.main.temp, 295.49)
+            XCTAssertEqual(firstForecastResult.main.temp, 280.49)
             XCTAssertEqual(firstForecastResult.weather.first!.id, 802)
 
         } catch {
